@@ -81,6 +81,7 @@ public class UserServiceImpl implements UserService {
 
         userDTO.setUsername(user.getUsername());
         userDTO.setEmail(user.getEmail());
+        userDTO.setPosts(user.getPosts());
         return userDTO;
     }
 }
