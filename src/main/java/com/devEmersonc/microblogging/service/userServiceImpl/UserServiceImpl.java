@@ -7,6 +7,7 @@ import com.devEmersonc.microblogging.model.User;
 import com.devEmersonc.microblogging.repository.RoleRepository;
 import com.devEmersonc.microblogging.repository.UserRepository;
 import com.devEmersonc.microblogging.service.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +68,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public void deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No fue posible encontrar al usuario ingresado."));
