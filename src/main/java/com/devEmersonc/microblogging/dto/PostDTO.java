@@ -1,13 +1,22 @@
 package com.devEmersonc.microblogging.dto;
 
-import com.devEmersonc.microblogging.model.User;
-
 import java.util.Date;
+import java.util.List;
 
 public class PostDTO {
+    private Long post_id;
     private String content;
     private Date createdAt;
-    private UserPostDTO author;
+    private UserDTO author;
+    private List<CommentDTO> comments;
+
+    public Long getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(Long post_id) {
+        this.post_id = post_id;
+    }
 
     public String getContent() {
         return content;
@@ -25,11 +34,19 @@ public class PostDTO {
         this.createdAt = createdAt;
     }
 
-    public UserPostDTO getAuthor() {
+    public UserDTO getAuthor() {
         return author;
     }
 
-    public void setAuthor(UserPostDTO author) {
+    public void setAuthor(UserDTO author) {
         this.author = author;
+    }
+
+    public List<CommentDTO> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDTO> comments) {
+        this.comments = comments;
     }
 }

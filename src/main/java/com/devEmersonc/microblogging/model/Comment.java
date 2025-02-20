@@ -1,28 +1,25 @@
 package com.devEmersonc.microblogging.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "comments")
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String content;
+    private String comment;
     private Date createdAt;
     private Date updatedAt;
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "author_comment_id")
+    private Post post;
 
     public Long getId() {
         return id;
@@ -32,20 +29,12 @@ public class Post {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getComment() {
+        return comment;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Date getCreatedAt() {
@@ -64,12 +53,20 @@ public class Post {
         this.updatedAt = updatedAt;
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     @PrePersist

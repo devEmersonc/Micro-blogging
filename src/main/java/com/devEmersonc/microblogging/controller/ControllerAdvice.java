@@ -1,13 +1,13 @@
 package com.devEmersonc.microblogging.controller;
 
 import com.devEmersonc.microblogging.dto.ErrorMessage;
+import com.devEmersonc.microblogging.exception.AccessDeniedException;
 import com.devEmersonc.microblogging.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -40,10 +40,10 @@ public class ControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ResponseEntity<Map<String, Object>> handleAccessDeniedException(HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> handleAccessDeniedException(AccessDeniedException exception, HttpServletRequest request) {
         Map<String, Object> errors = new HashMap<>();
         errors.put("status", HttpStatus.FORBIDDEN.value() + " " + HttpStatus.FORBIDDEN.getReasonPhrase());
-        errors.put("error", "Acceso denegado: No tienes permisos.");
+        errors.put("error", exception.getMessage());
         errors.put("timestamp", LocalDateTime.now().toString());
         errors.put("path", request.getRequestURI());
 

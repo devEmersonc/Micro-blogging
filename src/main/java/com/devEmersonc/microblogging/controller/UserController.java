@@ -1,7 +1,7 @@
 package com.devEmersonc.microblogging.controller;
 
 import com.devEmersonc.microblogging.dto.RegisterUserDTO;
-import com.devEmersonc.microblogging.dto.UserDTO;
+import com.devEmersonc.microblogging.dto.UserPostsDTO;
 import com.devEmersonc.microblogging.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -20,14 +20,14 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDTO>> getUsers() {
-        List<UserDTO> users = userService.getUsers();
+    public ResponseEntity<List<UserPostsDTO>> getUsers() {
+        List<UserPostsDTO> users = userService.getUsers();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUser(@PathVariable Long id) {
-        UserDTO user = userService.getUser(id);
+    public ResponseEntity<UserPostsDTO> getUser(@PathVariable Long id) {
+        UserPostsDTO user = userService.getUser(id);
         return ResponseEntity.ok(user);
     }
 

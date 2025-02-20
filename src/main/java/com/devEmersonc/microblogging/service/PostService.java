@@ -2,9 +2,7 @@ package com.devEmersonc.microblogging.service;
 
 import com.devEmersonc.microblogging.dto.CreatePostDTO;
 import com.devEmersonc.microblogging.dto.PostDTO;
-import com.devEmersonc.microblogging.dto.UserPostDTO;
 import com.devEmersonc.microblogging.model.Post;
-import com.devEmersonc.microblogging.model.User;
 
 import java.util.List;
 
